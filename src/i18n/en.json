@@ -1,0 +1,76 @@
+{
+  "app": {
+    "name": "Madha TV AI"
+  },
+  "chat": {
+    "greeting": "Grace and peace be with you.",
+    "greetingSubtitle": "How may I assist your spiritual journey today?",
+    "placeholder": "What would you like to explore?",
+    "sacredSources": "SACRED SOURCES"
+  },
+  "voice": {
+    "listening": "I AM LISTENING TO YOUR PRAYER...",
+    "processing": "PROCESSING YOUR PRAYER...",
+    "received": "PRAYER RECEIVED",
+    "tapToBegin": "TAP TO BEGIN YOUR PRAYER...",
+    "close": "CLOSE",
+    "type": "TYPE"
+  },
+  "bread": {
+    "holyGospel": "THE HOLY GOSPEL",
+    "reflect": "REFLECT",
+    "sharePrayer": "SHARE PRAYER"
+  },
+  "journey": {
+    "title": "Your Spiritual Chronicle",
+    "subtitle": "Your word is a lamp to my feet and a light to my path.",
+    "dayStreak": "DAY STREAK",
+    "versesRead": "VERSES READ",
+    "prayersSent": "PRAYERS SENT",
+    "insights": "INSIGHTS",
+    "chronicles": "Chronicles of Faith",
+    "monthlyGoal": "Monthly Bible Goal"
+  },
+  "community": {
+    "title": "Prayer Community",
+    "live": "Live",
+    "prayingNow": "praying now",
+    "pray": "Pray",
+    "respond": "Respond",
+    "joinedInPrayer": "joined in prayer"
+  },
+  "settings": {
+    "title": "Settings",
+    "account": "ACCOUNT",
+    "experience": "EXPERIENCE",
+    "spiritual": "SPIRITUAL",
+    "support": "SUPPORT",
+    "editProfile": "Edit Profile",
+    "subscription": "Subscription Plan",
+    "privacy": "Privacy",
+    "theme": "Theme Selection",
+    "language": "Language",
+    "notifications": "Notification Preferences",
+    "prayerReminders": "Prayer Reminders",
+    "dailyVerse": "Daily Verse Delivery",
+    "journalPrivacy": "Journal Privacy",
+    "about": "About Madha TV",
+    "help": "Help Center",
+    "rate": "Rate the App",
+    "signOut": "Sign Out"
+  },
+  "notifications": {
+    "title": "Spiritual Discipline",
+    "subtitle": "Refining your daily path to devotion through sacred reminders.",
+    "morningGospel": "Morning Gospel",
+    "eveningReflection": "Evening Reflection",
+    "angelus": "Angelus",
+    "rosary": "Rosary"
+  },
+  "auth": {
+    "welcome": "Begin Your Journey",
+    "signIn": "Sign In",
+    "signUp": "Create Account",
+    "guest": "Continue as Guest"
+  }
+}
