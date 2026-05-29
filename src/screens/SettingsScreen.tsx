@@ -87,7 +87,7 @@ export function SettingsScreen() {
 
         <SectionLabel title="ACCOUNT" />
         <View style={[styles.section, { backgroundColor: colors.surface }, SHADOWS.sm]}>
-          <SettingsRow icon="person-circle-outline" label="Edit Profile" onPress={() => {}} />
+          <SettingsRow icon="person-circle-outline" label="Edit Profile" onPress={() => navigation.navigate('EditProfile')} />
           <View style={[styles.divider, { backgroundColor: colors.divider }]} />
           <SettingsRow icon="card-outline" label="Subscription Plan" rightElement={
             <View style={[styles.premiumBadge, { backgroundColor: colors.goldMuted }]}>
@@ -97,7 +97,7 @@ export function SettingsScreen() {
             </View>
           } />
           <View style={[styles.divider, { backgroundColor: colors.divider }]} />
-          <SettingsRow icon="lock-closed-outline" label="Privacy" />
+          <SettingsRow icon="lock-closed-outline" label="Privacy" onPress={() => navigation.navigate('Privacy')} />
         </View>
 
         <SectionLabel title="EXPERIENCE" />
@@ -123,18 +123,18 @@ export function SettingsScreen() {
         <View style={[styles.section, { backgroundColor: colors.surface }, SHADOWS.sm]}>
           <SettingsRow icon="time-outline" label="Prayer Reminders" onPress={() => navigation.navigate('Notifications')} />
           <View style={[styles.divider, { backgroundColor: colors.divider }]} />
-          <SettingsRow icon="book-outline" label="Daily Verse Delivery" />
+          <SettingsRow icon="book-outline" label="Daily Verse Delivery" onPress={() => navigation.navigate('DailyVerse')} />
           <View style={[styles.divider, { backgroundColor: colors.divider }]} />
-          <SettingsRow icon="shield-outline" label="Journal Privacy" />
+          <SettingsRow icon="shield-outline" label="Journal Privacy" onPress={() => navigation.navigate('JournalPrivacy')} />
         </View>
 
         <SectionLabel title="SUPPORT" />
         <View style={[styles.section, { backgroundColor: colors.surface }, SHADOWS.sm]}>
-          <SettingsRow icon="information-circle-outline" label="About Madha TV" />
+          <SettingsRow icon="information-circle-outline" label="About Madha TV" onPress={() => navigation.navigate('About')} />
           <View style={[styles.divider, { backgroundColor: colors.divider }]} />
-          <SettingsRow icon="help-circle-outline" label="Help Center" />
+          <SettingsRow icon="help-circle-outline" label="Help Center" onPress={() => navigation.navigate('HelpCenter')} />
           <View style={[styles.divider, { backgroundColor: colors.divider }]} />
-          <SettingsRow icon="star-outline" label="Rate the App" />
+          <SettingsRow icon="star-outline" label="Rate the App" onPress={() => navigation.navigate('RateApp')} />
           <View style={[styles.divider, { backgroundColor: colors.divider }]} />
           <SettingsRow icon="log-out-outline" label="Sign Out" isDestructive onPress={signOut} />
         </View>
