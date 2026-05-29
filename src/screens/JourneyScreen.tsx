@@ -11,6 +11,7 @@ import { OrnamentalDivider } from '../components/common/OrnamentalDivider';
 import { AddJournalModal } from '../components/journey/AddJournalModal';
 import { useJourneyStore } from '../store/useJourneyStore';
 import { useAuthStore } from '../store/useAuthStore';
+import { NewJournalEntry } from '../types';
 
 function StatCard({ value, label, icon }: { value: string; label: string; icon: string }) {
   const { colors } = useTheme();
@@ -73,7 +74,7 @@ export function JourneyScreen() {
     ? Math.round((stats.bibleGoalCurrent / stats.bibleGoalTarget) * 100)
     : 0;
 
-  const handleAddEntry = async (entry: any) => {
+  const handleAddEntry = async (entry: NewJournalEntry) => {
     await addEntry(entry);
     await fetchEntries();
     await refreshStats();

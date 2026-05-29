@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
@@ -8,6 +8,7 @@ import { useTheme } from '../theme/ThemeContext';
 import { TYPOGRAPHY, SPACING, RADIUS, SHADOWS } from '../theme/tokens';
 import { AppHeader } from '../components/common/AppHeader';
 import { AvatarCircle } from '../components/common/AvatarCircle';
+import { AddPrayerModal } from '../components/community/AddPrayerModal';
 import { useCommunityStore } from '../store/useCommunityStore';
 import { useAuthStore } from '../store/useAuthStore';
 import { PrayerRequest } from '../types';
@@ -73,8 +74,9 @@ export function CommunityScreen() {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<any>();
-  const { prayers, isLoading, activePrayingCount, fetchPrayers, pray } = useCommunityStore();
+  const { prayers, isLoading, activePrayingCount, fetchPrayers, pray, submitPrayer } = useCommunityStore();
   const { profile } = useAuthStore();
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     fetchPrayers();
@@ -83,6 +85,11 @@ export function CommunityScreen() {
   const handlePray = async (prayerId: string) => {
     notificationSuccess();
     await pray(prayerId);
+  };
+
+  const handleSubmitPrayer = async (content: string, isPublic: boolean) => {
+    await submitPrayer(content, isPublic);
+    await fetchPrayers();
   };
 
   const renderItem = ({ item }: { item: PrayerRequest }) => (
@@ -123,9 +130,18 @@ export function CommunityScreen() {
         }
       />
 
-      <TouchableOpacity style={[styles.fab, { backgroundColor: colors.crimson }, SHADOWS.lg]}>
+      <TouchableOpacity
+        style={[styles.fab, { backgroundColor: colors.crimson }, SHADOWS.lg]}
+        onPress={() => setIsModalVisible(true)}
+      >
         <Ionicons name="add" size={24} color={colors.white} />
       </TouchableOpacity>
+
+      <AddPrayerModal
+        visible={isModalVisible}
+        onClose={() => setIsModalVisible(false)}
+        onSubmit={handleSubmitPrayer}
+      />
     </View>
   );
 }
