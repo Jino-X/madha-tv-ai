@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
@@ -8,6 +8,7 @@ import { useTheme } from '../theme/ThemeContext';
 import { TYPOGRAPHY, SPACING, RADIUS, SHADOWS } from '../theme/tokens';
 import { AppHeader } from '../components/common/AppHeader';
 import { OrnamentalDivider } from '../components/common/OrnamentalDivider';
+import { AddJournalModal } from '../components/journey/AddJournalModal';
 import { useJourneyStore } from '../store/useJourneyStore';
 import { useAuthStore } from '../store/useAuthStore';
 
@@ -59,8 +60,9 @@ export function JourneyScreen() {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<any>();
-  const { entries, stats, fetchEntries, refreshStats } = useJourneyStore();
+  const { entries, stats, fetchEntries, refreshStats, addEntry } = useJourneyStore();
   const { profile } = useAuthStore();
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     fetchEntries();
@@ -70,6 +72,12 @@ export function JourneyScreen() {
   const goalPercent = stats.bibleGoalTarget > 0
     ? Math.round((stats.bibleGoalCurrent / stats.bibleGoalTarget) * 100)
     : 0;
+
+  const handleAddEntry = async (entry: any) => {
+    await addEntry(entry);
+    await fetchEntries();
+    await refreshStats();
+  };
 
   return (
     <View style={[styles.container, { backgroundColor: colors.bg, paddingTop: insets.top }]}>
@@ -151,9 +159,18 @@ export function JourneyScreen() {
         )}
       </ScrollView>
 
-      <TouchableOpacity style={[styles.fab, { backgroundColor: colors.crimson }, SHADOWS.lg]}>
+      <TouchableOpacity
+        style={[styles.fab, { backgroundColor: colors.crimson }, SHADOWS.lg]}
+        onPress={() => setIsModalVisible(true)}
+      >
         <Ionicons name="add" size={24} color={colors.white} />
       </TouchableOpacity>
+
+      <AddJournalModal
+        visible={isModalVisible}
+        onClose={() => setIsModalVisible(false)}
+        onSubmit={handleAddEntry}
+      />
     </View>
   );
 }
