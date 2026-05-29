@@ -5,8 +5,8 @@ import { BibleVerse, BiblePassage } from '../types';
 import { DEFAULT_VERSES } from '../constants/defaultVerses';
 
 const API_KEY = Constants.expoConfig?.extra?.BIBLE_API_KEY || '';
-const BASE_URL = 'https://api.scripture.api.bible/v1';
-const BIBLE_ID = 'de4e12af7f28f599-01'; // KJV
+const BASE_URL = 'https://rest.api.bible/v1';
+const BIBLE_ID = 'de4e12af7f28f599-01'; // KJV and CSB (a556c5305ee15c3f-01)
 
 const bibleApi = axios.create({
   baseURL: BASE_URL,
