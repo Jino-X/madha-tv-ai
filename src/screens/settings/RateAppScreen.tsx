@@ -50,8 +50,8 @@ export function RateAppScreen() {
             {
               text: 'Rate on App Store',
               onPress: () => {
-                // Replace with actual App Store link
-                Linking.openURL('https://apps.apple.com/app/madha-tv-ai');
+                // The actual App Store link
+                Linking.openURL('https://apps.apple.com/in/app/madha-tv/id879458299');
               },
             },
           ]

@@ -114,7 +114,7 @@ export function AboutScreen() {
         </Text>
 
         <TouchableOpacity
-          onPress={() => openLink('https://madhatv.com')}
+          onPress={() => openLink('https://madhatv.in/')}
           style={[styles.linkCard, { backgroundColor: colors.surface }, SHADOWS.sm]}
         >
           <Ionicons name="globe-outline" size={24} color={colors.crimson} />
@@ -125,7 +125,7 @@ export function AboutScreen() {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => openLink('mailto:support@madhatv.com')}
+          onPress={() => openLink('mailto:info@madhatv.in')}
           style={[styles.linkCard, { backgroundColor: colors.surface }, SHADOWS.sm]}
         >
           <Ionicons name="mail-outline" size={24} color={colors.crimson} />
@@ -136,12 +136,12 @@ export function AboutScreen() {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => openLink('https://twitter.com/madhatv')}
+          onPress={() => openLink('https://www.youtube.com/@madhatelevision')}
           style={[styles.linkCard, { backgroundColor: colors.surface }, SHADOWS.sm]}
         >
-          <Ionicons name="logo-twitter" size={24} color={colors.crimson} />
+          <Ionicons name="logo-youtube" size={24} color={colors.crimson} />
           <Text style={[styles.linkText, { color: colors.ink, fontFamily: TYPOGRAPHY.fonts.sansSemiBold }]}>
-            Follow Us on Twitter
+            Follow Us on YouTube
           </Text>
           <Ionicons name="open-outline" size={20} color={colors.inkFaint} />
         </TouchableOpacity>
@@ -179,7 +179,7 @@ export function AboutScreen() {
             Made with ❤️ and 🙏 for the Catholic community
           </Text>
           <Text style={[styles.copyright, { color: colors.inkFaint, fontFamily: TYPOGRAPHY.fonts.sansRegular }]}>
-            © 2026 Madha TV. All rights reserved.
+            © {new Date().getFullYear()} Madha TV. All rights reserved.
           </Text>
         </View>
       </ScrollView>

@@ -110,7 +110,7 @@ export function HelpCenterScreen() {
         </Text>
 
         <TouchableOpacity
-          onPress={() => Linking.openURL('mailto:support@madhatv.com')}
+          onPress={() => Linking.openURL('mailto:info@madhatv.in')}
           style={[styles.actionCard, { backgroundColor: colors.surface }, SHADOWS.sm]}
         >
           <View style={[styles.actionIcon, { backgroundColor: colors.crimsonMuted }]}>
@@ -128,7 +128,7 @@ export function HelpCenterScreen() {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => Linking.openURL('https://madhatv.com/tutorials')}
+          onPress={() => Linking.openURL('https://madhatv.in/Gallery')}
           style={[styles.actionCard, { backgroundColor: colors.surface }, SHADOWS.sm]}
         >
           <View style={[styles.actionIcon, { backgroundColor: colors.goldMuted }]}>
@@ -146,7 +146,7 @@ export function HelpCenterScreen() {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => Linking.openURL('https://madhatv.com/community')}
+          onPress={() => Linking.openURL('https://madhatv.in/Home')}
           style={[styles.actionCard, { backgroundColor: colors.surface }, SHADOWS.sm]}
         >
           <View style={[styles.actionIcon, { backgroundColor: colors.crimsonMuted }]}>
@@ -183,7 +183,7 @@ export function HelpCenterScreen() {
               Still Need Help?
             </Text>
             <Text style={[styles.contactDesc, { color: colors.gold, fontFamily: TYPOGRAPHY.fonts.sansRegular }]}>
-              Our support team is here for you. Email us at support@madhatv.com and we'll respond within 24 hours.
+              Our support team is here for you. Email us at support2@madhatv.in and we'll respond within 24 hours.
             </Text>
           </View>
         </View>

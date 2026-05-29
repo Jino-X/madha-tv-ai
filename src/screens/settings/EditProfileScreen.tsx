@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
   avatarSection: { alignItems: 'center', paddingVertical: SPACING.xl },
   changePhotoButton: {
     position: 'absolute',
-    bottom: SPACING.xl,
+    bottom: SPACING.xxxl,
     right: '35%',
     width: 36,
     height: 36,
