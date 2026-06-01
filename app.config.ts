@@ -59,6 +59,7 @@ export default {
       projectId: '8d53f6c2-13e4-4922-9b0e-4fc7c192b93b',
     },
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+    GEMINI_API_KEY: process.env.GEMINI_API_KEY,
     ELEVENLABS_API_KEY: process.env.ELEVENLABS_API_KEY,
     BIBLE_API_KEY: process.env.BIBLE_API_KEY,
     SUPABASE_URL: process.env.SUPABASE_URL,

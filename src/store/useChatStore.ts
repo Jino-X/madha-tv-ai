@@ -8,10 +8,12 @@ interface ChatStore {
   isStreaming: boolean;
   streamingText: string;
   activeSources: string[];
+  selectedLanguage: 'english' | 'tamil';
   addUserMessage: (text: string) => void;
   appendStreamChunk: (chunk: string) => void;
   finalizeStreamMessage: () => void;
   toggleSource: (source: string) => void;
+  setSelectedLanguage: (language: 'english' | 'tamil') => void;
   clearHistory: () => void;
   setStreaming: (streaming: boolean) => void;
 }
@@ -23,6 +25,7 @@ export const useChatStore = create<ChatStore>()(
       isStreaming: false,
       streamingText: '',
       activeSources: [],
+      selectedLanguage: 'english',
 
       addUserMessage: (text: string) => {
         const message: Message = {
@@ -70,6 +73,10 @@ export const useChatStore = create<ChatStore>()(
         });
       },
 
+      setSelectedLanguage: (language: 'english' | 'tamil') => {
+        set({ selectedLanguage: language });
+      },
+
       clearHistory: () => {
         set({ messages: [], streamingText: '', isStreaming: false });
       },
@@ -87,6 +94,7 @@ export const useChatStore = create<ChatStore>()(
       partialize: (state) => ({
         messages: state.messages.slice(-20),
         activeSources: state.activeSources,
+        selectedLanguage: state.selectedLanguage,
       }),
     }
   )

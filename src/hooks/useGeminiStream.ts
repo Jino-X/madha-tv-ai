@@ -1,12 +1,12 @@
 import { useRef, useCallback } from 'react';
-import { streamChatMessage } from '../api/openaiClient';
+import { streamChatMessage } from '../api/geminiClient';
 import { useChatStore } from '../store/useChatStore';
 import { useAuthStore } from '../store/useAuthStore';
 import { ChatStreamOptions } from '../types';
 
-export function useOpenAIStream() {
+export function useGeminiStream() {
   const abortControllerRef = useRef<AbortController | null>(null);
-  const { messages, activeSources, appendStreamChunk, finalizeStreamMessage, setStreaming } =
+  const { messages, activeSources, selectedLanguage, appendStreamChunk, finalizeStreamMessage, setStreaming } =
     useChatStore();
   const { profile } = useAuthStore();
 
@@ -18,7 +18,7 @@ export function useOpenAIStream() {
       setStreaming(true);
 
       const options: ChatStreamOptions = {
-        language: profile?.language || 'english',
+        language: selectedLanguage,
         userName: profile?.displayName || 'Dear Friend',
         sacredSources: activeSources,
       };
@@ -36,7 +36,7 @@ export function useOpenAIStream() {
         abortControllerRef.current.signal
       );
     },
-    [messages, activeSources, profile, appendStreamChunk, finalizeStreamMessage, setStreaming]
+    [messages, activeSources, selectedLanguage, profile, appendStreamChunk, finalizeStreamMessage, setStreaming]
   );
 
   const cancelStream = useCallback(() => {

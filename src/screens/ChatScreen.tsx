@@ -9,10 +9,10 @@ import { MessageBubble } from '../components/chat/MessageBubble';
 import { DailyVerseCard } from '../components/chat/DailyVerseCard';
 import { TypingIndicator } from '../components/chat/TypingIndicator';
 import { ChatInputBar } from '../components/chat/ChatInputBar';
-import { SacredSourcesBar } from '../components/chat/SacredSourcesBar';
+import { LanguageSelector } from '../components/chat/LanguageSelector';
 import { useChatStore } from '../store/useChatStore';
 import { useAuthStore } from '../store/useAuthStore';
-import { useOpenAIStream } from '../hooks/useOpenAIStream';
+import { useGeminiStream } from '../hooks/useGeminiStream';
 import { Message } from '../types';
 
 export function ChatScreen() {
@@ -23,7 +23,7 @@ export function ChatScreen() {
 
   const { messages, isStreaming, streamingText, addUserMessage } = useChatStore();
   const { profile } = useAuthStore();
-  const { streamMessage } = useOpenAIStream();
+  const { streamMessage } = useGeminiStream();
 
   const handleSend = async (text: string) => {
     addUserMessage(text);
@@ -97,7 +97,7 @@ export function ChatScreen() {
         showsVerticalScrollIndicator={false}
       />
 
-      <SacredSourcesBar />
+      <LanguageSelector />
       <ChatInputBar
         onSend={handleSend}
         onMicPress={handleMicPress}

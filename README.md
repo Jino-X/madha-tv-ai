@@ -34,7 +34,7 @@ A deeply compassionate, theologically grounded Catholic spiritual guide mobile a
 
 ### Backend & APIs
 - **Supabase** - Authentication, real-time database, and storage
-- **OpenAI GPT-4o** - AI-powered spiritual guidance
+- **Google Gemini 1.5 Pro** - AI-powered spiritual guidance with 1M token context
 - **OpenAI Whisper** - Speech-to-text (planned)
 - **ElevenLabs** - Text-to-speech (planned)
 - **API.Bible** - Scripture data
@@ -93,7 +93,7 @@ npm install
 Create a `.env` file in the root directory:
 
 ```env
-OPENAI_API_KEY=your_openai_api_key
+GEMINI_API_KEY=your_gemini_api_key
 ELEVENLABS_API_KEY=your_elevenlabs_api_key
 BIBLE_API_KEY=your_bible_api_key
 SUPABASE_URL=your_supabase_project_url
@@ -218,10 +218,10 @@ Add new languages in `src/i18n/`
 
 3. Enable Authentication providers (Email, Google, etc.)
 
-### OpenAI Setup
+### Google Gemini Setup
 
-1. Get API key from [platform.openai.com](https://platform.openai.com)
-2. Add to `.env` as `OPENAI_API_KEY`
+1. Get API key from [Google AI Studio](https://makersuite.google.com/app/apikey)
+2. Add to `.env` as `GEMINI_API_KEY`
 
 ### Bible API Setup
 

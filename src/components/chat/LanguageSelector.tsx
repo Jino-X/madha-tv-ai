@@ -1,27 +1,30 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useTheme } from '../../theme/ThemeContext';
 import { TYPOGRAPHY, SPACING, RADIUS } from '../../theme/tokens';
 import { useChatStore } from '../../store/useChatStore';
 
-const SOURCES = ['Vatican News', 'English', 'தமிழ்', 'Bible Gateway', 'USCCB'];
+const LANGUAGES = [
+  { id: 'english' as const, label: 'English' },
+  { id: 'tamil' as const, label: 'தமிழ்' },
+];
 
-export function SacredSourcesBar() {
+export function LanguageSelector() {
   const { colors } = useTheme();
-  const { activeSources, toggleSource } = useChatStore();
+  const { selectedLanguage, setSelectedLanguage } = useChatStore();
 
   return (
     <View style={[styles.container, { backgroundColor: colors.surface, borderTopColor: colors.divider }]}>
-      <Text style={[styles.label, { color: colors.inkFaint }]}>SACRED SOURCES</Text>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.chips}>
-        {SOURCES.map((source) => {
-          const isActive = activeSources.includes(source);
+      <Text style={[styles.label, { color: colors.inkFaint }]}>RESPONSE LANGUAGE</Text>
+      <View style={styles.languageButtons}>
+        {LANGUAGES.map((lang) => {
+          const isActive = selectedLanguage === lang.id;
           return (
             <TouchableOpacity
-              key={source}
-              onPress={() => toggleSource(source)}
+              key={lang.id}
+              onPress={() => setSelectedLanguage(lang.id)}
               style={[
-                styles.chip,
+                styles.languageButton,
                 {
                   backgroundColor: isActive ? colors.crimsonMuted : colors.surfaceAlt,
                   borderColor: isActive ? colors.crimson : colors.gold,
@@ -30,19 +33,19 @@ export function SacredSourcesBar() {
             >
               <Text
                 style={[
-                  styles.chipText,
+                  styles.buttonText,
                   {
                     color: isActive ? colors.crimson : colors.inkMedium,
                     fontFamily: TYPOGRAPHY.fonts.sansMedium,
                   },
                 ]}
               >
-                {source}
+                {lang.label}
               </Text>
             </TouchableOpacity>
           );
         })}
-      </ScrollView>
+      </View>
     </View>
   );
 }
@@ -59,17 +62,20 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     marginBottom: SPACING.sm,
   },
-  chips: {
+  languageButtons: {
     flexDirection: 'row',
     gap: SPACING.sm,
   },
-  chip: {
-    paddingHorizontal: 14,
-    paddingVertical: 6,
+  languageButton: {
+    paddingHorizontal: 20,
+    paddingVertical: 8,
     borderRadius: RADIUS.full,
-    borderWidth: 0.5,
+    borderWidth: 1.5,
+    minWidth: 100,
+    alignItems: 'center',
   },
-  chipText: {
-    fontSize: TYPOGRAPHY.sizes.sm,
+  buttonText: {
+    fontSize: TYPOGRAPHY.sizes.base,
+    fontWeight: '600',
   },
 });
