@@ -34,7 +34,7 @@ A deeply compassionate, theologically grounded Catholic spiritual guide mobile a
 
 ### Backend & APIs
 - **Supabase** - Authentication, real-time database, and storage
-- **Google Gemini 1.5 Pro** - AI-powered spiritual guidance with 1M token context
+- **Google Gemini 2.5 Flash** - AI-powered spiritual guidance with 1.5M token context
 - **OpenAI Whisper** - Speech-to-text (planned)
 - **ElevenLabs** - Text-to-speech (planned)
 - **API.Bible** - Scripture data
