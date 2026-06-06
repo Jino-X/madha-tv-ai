@@ -2,6 +2,9 @@
   "name": "madhatvai",
   "version": "1.0.0",
   "main": "index.ts",
+  "engines": {
+    "node": ">=24.16.0"
+  },
   "dependencies": {
     "@expo-google-fonts/crimson-pro": "^0.4.2",
     "@expo-google-fonts/eb-garamond": "^0.4.2",
