@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Switch, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
@@ -78,26 +78,6 @@ export function SettingsScreen() {
           <Text style={[styles.profileName, { color: colors.ink, fontFamily: TYPOGRAPHY.fonts.serifBold }]}>
             {profile?.displayName || 'Dear Friend'}
           </Text>
-          <View style={[styles.badge, { backgroundColor: colors.crimson }]}>
-            <Text style={[styles.badgeText, { color: colors.white, fontFamily: TYPOGRAPHY.fonts.sansSemiBold }]}>
-              ✦ Active Believer • {profile?.streak || 0} Day Streak
-            </Text>
-          </View>
-        </View>
-
-        <SectionLabel title="ACCOUNT" />
-        <View style={[styles.section, { backgroundColor: colors.surface }, SHADOWS.sm]}>
-          <SettingsRow icon="person-circle-outline" label="Edit Profile" onPress={() => navigation.navigate('EditProfile')} />
-          <View style={[styles.divider, { backgroundColor: colors.divider }]} />
-          <SettingsRow icon="card-outline" label="Subscription Plan" rightElement={
-            <View style={[styles.premiumBadge, { backgroundColor: colors.goldMuted }]}>
-              <Text style={[styles.premiumText, { color: colors.gold, fontFamily: TYPOGRAPHY.fonts.sansSemiBold }]}>
-                {profile?.subscriptionTier === 'premium' ? 'Premium' : 'Free'}
-              </Text>
-            </View>
-          } />
-          <View style={[styles.divider, { backgroundColor: colors.divider }]} />
-          <SettingsRow icon="lock-closed-outline" label="Privacy" onPress={() => navigation.navigate('Privacy')} />
         </View>
 
         <SectionLabel title="EXPERIENCE" />
@@ -108,24 +88,6 @@ export function SettingsScreen() {
             subtitle={`Current: ${themeNames[currentTheme]}`}
             onPress={() => navigation.navigate('ThemeSelection')}
           />
-          <View style={[styles.divider, { backgroundColor: colors.divider }]} />
-          <SettingsRow icon="globe-outline" label="Language" subtitle={profile?.language === 'tamil' ? 'Tamil' : 'English'} />
-          <View style={[styles.divider, { backgroundColor: colors.divider }]} />
-          <SettingsRow
-            icon="notifications-outline"
-            label="Notification Preferences"
-            onPress={() => navigation.navigate('Notifications')}
-            rightElement={<Switch value={true} trackColor={{ true: colors.crimson, false: colors.divider }} />}
-          />
-        </View>
-
-        <SectionLabel title="SPIRITUAL" />
-        <View style={[styles.section, { backgroundColor: colors.surface }, SHADOWS.sm]}>
-          <SettingsRow icon="time-outline" label="Prayer Reminders" onPress={() => navigation.navigate('Notifications')} />
-          <View style={[styles.divider, { backgroundColor: colors.divider }]} />
-          <SettingsRow icon="book-outline" label="Daily Verse Delivery" onPress={() => navigation.navigate('DailyVerse')} />
-          <View style={[styles.divider, { backgroundColor: colors.divider }]} />
-          <SettingsRow icon="shield-outline" label="Journal Privacy" onPress={() => navigation.navigate('JournalPrivacy')} />
         </View>
 
         <SectionLabel title="SUPPORT" />
@@ -150,8 +112,6 @@ const styles = StyleSheet.create({
   scrollContent: { paddingBottom: 40 },
   profileSection: { alignItems: 'center', paddingVertical: SPACING.xl },
   profileName: { fontSize: TYPOGRAPHY.sizes.xl, marginTop: SPACING.md },
-  badge: { marginTop: SPACING.sm, paddingHorizontal: 14, paddingVertical: 6, borderRadius: RADIUS.full },
-  badgeText: { fontSize: TYPOGRAPHY.sizes.sm, color: '#fff' },
   sectionLabel: { fontSize: TYPOGRAPHY.sizes.xs, letterSpacing: 2, textTransform: 'uppercase', marginTop: SPACING.xl, marginBottom: SPACING.sm, marginLeft: SPACING.base },
   section: { marginHorizontal: SPACING.base, borderRadius: RADIUS.md, overflow: 'hidden' },
   settingsRow: { flexDirection: 'row', alignItems: 'center', height: 54, paddingHorizontal: SPACING.base, gap: SPACING.md },
@@ -159,6 +119,4 @@ const styles = StyleSheet.create({
   rowLabel: { fontSize: TYPOGRAPHY.sizes.base },
   rowSubtitle: { fontSize: TYPOGRAPHY.sizes.sm, marginTop: 2 },
   divider: { height: 0.5, marginLeft: 48 },
-  premiumBadge: { paddingHorizontal: 10, paddingVertical: 4, borderRadius: RADIUS.full },
-  premiumText: { fontSize: TYPOGRAPHY.sizes.sm },
 });

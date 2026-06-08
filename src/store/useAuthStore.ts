@@ -18,10 +18,7 @@ interface AuthStore {
   signUp: (email: string, password: string, name: string) => Promise<void>;
   signOut: () => Promise<void>;
   setGuest: () => void;
-  updateProfile: (data: Partial<Profile>) => Promise<void>;
   refreshProfile: () => Promise<void>;
-  setUser: (user: User | null) => void;
-  setProfile: (profile: Profile | null) => void;
 }
 
 export const useAuthStore = create<AuthStore>()(
@@ -98,19 +95,6 @@ export const useAuthStore = create<AuthStore>()(
         });
       },
 
-      updateProfile: async (data: Partial<Profile>) => {
-        const { user, profile } = get();
-        if (!user || !profile) return;
-        const updateData: Record<string, unknown> = {};
-        if (data.displayName) updateData.display_name = data.displayName;
-        if (data.avatarUrl) updateData.avatar_url = data.avatarUrl;
-        if (data.language) updateData.language = data.language;
-        if (data.theme) updateData.theme = data.theme;
-
-        await supabase.from('profiles').update(updateData).eq('id', user.id);
-        set({ profile: { ...profile, ...data } });
-      },
-
       refreshProfile: async () => {
         const { user } = get();
         if (!user) return;
@@ -135,8 +119,6 @@ export const useAuthStore = create<AuthStore>()(
         }
       },
 
-      setUser: (user) => set({ user }),
-      setProfile: (profile) => set({ profile }),
     }),
     {
       name: 'auth-storage',

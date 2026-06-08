@@ -11,9 +11,6 @@ export default {
     supportsTablet: true,
     bundleIdentifier: 'com.madhatv.ai',
     infoPlist: {
-      NSMicrophoneUsageDescription: 'Madha TV AI needs microphone access for voice prayer.',
-      NSCameraUsageDescription: 'Madha TV AI needs camera access for profile photo.',
-      UIBackgroundModes: ['audio'],
       ITSAppUsesNonExemptEncryption: false,
     },
   },
@@ -27,17 +24,11 @@ export default {
     package: 'com.madhatv.ai',
     softwareKeyboardLayoutMode: 'resize',
     permissions: [
-      'RECORD_AUDIO',
-      'CAMERA',
-      'READ_EXTERNAL_STORAGE',
       'VIBRATE',
-      'RECEIVE_BOOT_COMPLETED',
     ],
   },
   plugins: [
     'expo-font',
-    'expo-secure-store',
-    'expo-image-picker',
     [
       'expo-splash-screen',
       {
@@ -46,22 +37,11 @@ export default {
         backgroundColor: '#2C1810',
       },
     ],
-    [
-      'expo-notifications',
-      {
-        icon: './assets/icon.png',
-        color: '#8B1A1A',
-      },
-    ],
   ],
   extra: {
     eas: {
       projectId: '65e9c770-122a-4efd-8886-5942cd3f9af3',
     },
-    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
-    GEMINI_API_KEY: process.env.GEMINI_API_KEY,
-    ELEVENLABS_API_KEY: process.env.ELEVENLABS_API_KEY,
-    BIBLE_API_KEY: process.env.BIBLE_API_KEY,
     SUPABASE_URL: process.env.SUPABASE_URL,
     SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY,
   },

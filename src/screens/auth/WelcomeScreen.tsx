@@ -88,10 +88,6 @@ export function WelcomeScreen() {
         <Animated.Text style={[styles.subtitle, subtitleStyle]}>
           Your Sacred Spiritual Companion
         </Animated.Text>
-
-        <Animated.Text style={[styles.scripture, scriptureStyle]}>
-          "I am the way, the truth, and the life." — John 14:6
-        </Animated.Text>
       </View>
 
       <Animated.View style={[styles.buttons, { paddingBottom: insets.bottom + 20 }, buttonsStyle]}>

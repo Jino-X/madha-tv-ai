@@ -7,12 +7,11 @@ import { TYPOGRAPHY, SPACING, RADIUS, SHADOWS } from '../../theme/tokens';
 
 interface ChatInputBarProps {
   onSend: (text: string) => void;
-  onMicPress?: () => void;
   placeholder?: string;
   disabled?: boolean;
 }
 
-export function ChatInputBar({ onSend, onMicPress, placeholder, disabled }: ChatInputBarProps) {
+export function ChatInputBar({ onSend, placeholder, disabled }: ChatInputBarProps) {
   const { colors } = useTheme();
   const [text, setText] = useState('');
 
@@ -29,10 +28,6 @@ export function ChatInputBar({ onSend, onMicPress, placeholder, disabled }: Chat
       keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
     >
       <View style={[styles.container, { backgroundColor: colors.surface, borderTopColor: colors.divider }, SHADOWS.sm]}>
-        <TouchableOpacity style={styles.iconButton} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
-          <Ionicons name="add" size={24} color={colors.inkLight} />
-        </TouchableOpacity>
-
         <TextInput
           style={[
             styles.input,
@@ -50,12 +45,6 @@ export function ChatInputBar({ onSend, onMicPress, placeholder, disabled }: Chat
           maxLength={2000}
           editable={!disabled}
         />
-
-        {onMicPress && !text.trim() && (
-          <TouchableOpacity onPress={onMicPress} style={styles.iconButton} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
-            <Ionicons name="mic-outline" size={22} color={colors.inkLight} />
-          </TouchableOpacity>
-        )}
 
         <TouchableOpacity
           onPress={handleSend}
@@ -91,11 +80,6 @@ const styles = StyleSheet.create({
     paddingVertical: SPACING.sm,
     borderRadius: RADIUS.xl,
     lineHeight: 20,
-  },
-  iconButton: {
-    padding: SPACING.sm,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   sendButton: {
     width: 36,
