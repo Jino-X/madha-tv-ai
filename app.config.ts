@@ -56,7 +56,7 @@ export default {
   ],
   extra: {
     eas: {
-      projectId: '8d53f6c2-13e4-4922-9b0e-4fc7c192b93b',
+      projectId: '65e9c770-122a-4efd-8886-5942cd3f9af3',
     },
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
     GEMINI_API_KEY: process.env.GEMINI_API_KEY,
