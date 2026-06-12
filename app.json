@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "MadhaTVAI",
-    "slug": "MadhaTVAI",
+    "name": "Ask Madha",
+    "slug": "ask-madha",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

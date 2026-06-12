@@ -77,12 +77,7 @@ export function WelcomeScreen() {
         </Animated.View>
 
         <Animated.View style={titleStyle}>
-          <View style={styles.titleRow}>
-            <Text style={styles.appName}>Madha TV</Text>
-            <View style={styles.aiBadge}>
-              <Text style={styles.aiBadgeText}>AI</Text>
-            </View>
-          </View>
+          <Text style={styles.appName}>Ask Madha</Text>
         </Animated.View>
 
         <Animated.Text style={[styles.subtitle, subtitleStyle]}>

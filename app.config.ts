@@ -1,5 +1,5 @@
 export default {
-  name: 'Madha TV AI',
+  name: 'Ask Madha',
   slug: 'madha-tv-ai',
   version: '1.0.0',
   orientation: 'portrait' as const,
@@ -11,8 +11,8 @@ export default {
     supportsTablet: true,
     bundleIdentifier: 'com.madhatv.ai',
     infoPlist: {
-      NSMicrophoneUsageDescription: 'Madha TV AI needs microphone access for voice prayer.',
-      NSCameraUsageDescription: 'Madha TV AI needs camera access for profile photo.',
+      NSMicrophoneUsageDescription: 'Ask Madha needs microphone access for voice prayer.',
+      NSCameraUsageDescription: 'Ask Madha needs camera access for profile photo.',
       UIBackgroundModes: ['audio'],
       ITSAppUsesNonExemptEncryption: false,
     },

@@ -1,6 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
 import Constants from 'expo-constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as FileSystem from 'expo-file-system/legacy';
+import { decode } from 'base64-arraybuffer';
 import { Profile, JourneyEntry, PrayerRequest, UserStats, NewJournalEntry } from '../types';
 
 const SUPABASE_URL = Constants.expoConfig?.extra?.SUPABASE_URL || '';
@@ -109,6 +111,68 @@ export async function submitPrayerRequest(
     is_public: isPublic,
   });
   if (error) throw error;
+}
+
+export async function uploadAvatar(userId: string, uri: string): Promise<string> {
+  try {
+    // Create file path
+    const fileExt = uri.split('.').pop()?.toLowerCase() || 'jpg';
+    const fileName = `${userId}-${Date.now()}.${fileExt}`;
+    const filePath = `avatars/${fileName}`;
+
+    // First, check if bucket exists
+    try {
+      const { data: buckets, error: listError } = await supabase.storage.listBuckets();
+      
+      if (listError) {
+        console.error('Error listing buckets:', listError);
+      }
+      
+      const bucketExists = buckets?.some(b => b.name === 'profile-images');
+      if (!bucketExists) {
+        throw new Error('Storage bucket "profile-images" does not exist. Please create it in Supabase Dashboard: Storage → New Bucket → Name: "profile-images" → Check "Public bucket"');
+      }
+    } catch (bucketError) {
+      console.error('Bucket check error:', bucketError);
+      throw bucketError;
+    }
+
+    // Read the file as base64
+    const base64 = await FileSystem.readAsStringAsync(uri, {
+      encoding: FileSystem.EncodingType.Base64,
+    });
+
+    // Convert base64 to ArrayBuffer
+    const arrayBuffer = decode(base64);
+
+    // Upload to Supabase Storage with timeout
+    const { data: uploadData, error: uploadError } = await supabase.storage
+      .from('profile-images')
+      .upload(filePath, arrayBuffer, {
+        contentType: `image/${fileExt}`,
+        upsert: true,
+      });
+
+    if (uploadError) {
+      console.error('Upload error details:', {
+        message: uploadError.message,
+        status: uploadError.statusCode,
+        name: uploadError.name,
+      });
+      
+      throw new Error(`Upload failed: ${uploadError.message || 'Unknown error'}`);
+    }
+
+    // Get public URL
+    const { data } = supabase.storage
+      .from('profile-images')
+      .getPublicUrl(filePath);
+
+    return data.publicUrl;
+  } catch (error) {
+    console.error('uploadAvatar error:', error);
+    throw error;
+  }
 }
 
 export async function getUserStats(userId: string): Promise<UserStats> {

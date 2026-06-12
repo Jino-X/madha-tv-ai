@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "Madha TV AI"
+    "name": "Ask Madha"
   },
   "chat": {
     "greeting": "Grace and peace be with you.",
@@ -54,7 +54,7 @@
     "prayerReminders": "Prayer Reminders",
     "dailyVerse": "Daily Verse Delivery",
     "journalPrivacy": "Journal Privacy",
-    "about": "About Madha TV",
+    "about": "About Ask Madha",
     "help": "Help Center",
     "rate": "Rate the App",
     "signOut": "Sign Out"

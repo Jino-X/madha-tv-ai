@@ -7,26 +7,128 @@ import {
   TouchableOpacity,
   StyleSheet,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+import * as ImagePicker from 'expo-image-picker';
 import { useTheme } from '../../theme/ThemeContext';
 import { TYPOGRAPHY, SPACING, RADIUS, SHADOWS } from '../../theme/tokens';
 import { AvatarCircle } from '../../components/common/AvatarCircle';
 import { useAuthStore } from '../../store/useAuthStore';
+import { uploadAvatar } from '../../api/supabase';
 
 export function EditProfileScreen() {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
-  const { profile, updateProfile } = useAuthStore();
+  const { profile, updateProfile, user } = useAuthStore();
 
   const [displayName, setDisplayName] = useState(profile?.displayName || '');
-  const [email, setEmail] = useState(profile?.email || '');
+  const [email, setEmail] = useState(user?.email || '');
   const [bio, setBio] = useState(profile?.bio || '');
   const [phoneNumber, setPhoneNumber] = useState(profile?.phoneNumber || '');
+  const [avatarUri, setAvatarUri] = useState(profile?.avatarUrl || '');
   const [isSaving, setIsSaving] = useState(false);
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
+
+  const handlePickImage = async () => {
+    try {
+      // Request camera permissions
+      const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
+      const mediaPermission = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+      if (!cameraPermission.granted || !mediaPermission.granted) {
+        Alert.alert(
+          'Permission Required',
+          'Please grant camera and photo library permissions to change your profile picture.',
+          [{ text: 'OK' }]
+        );
+        return;
+      }
+
+      // Show options: Camera or Gallery
+      Alert.alert(
+        'Change Profile Picture',
+        'Choose an option',
+        [
+          {
+            text: 'Take Photo',
+            onPress: () => handleCameraLaunch(),
+          },
+          {
+            text: 'Choose from Gallery',
+            onPress: () => handleGalleryLaunch(),
+          },
+          {
+            text: 'Cancel',
+            style: 'cancel',
+          },
+        ],
+        { cancelable: true }
+      );
+    } catch (error) {
+      Alert.alert('Error', 'Failed to access camera or gallery');
+    }
+  };
+
+  const handleCameraLaunch = async () => {
+    try {
+      const result = await ImagePicker.launchCameraAsync({
+        mediaTypes: ['images'],
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 0.8,
+      });
+
+      if (!result.canceled && result.assets[0]) {
+        await handleImageUpload(result.assets[0].uri);
+      }
+    } catch (error) {
+      Alert.alert('Error', 'Failed to take photo');
+    }
+  };
+
+  const handleGalleryLaunch = async () => {
+    try {
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ['images'],
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 0.8,
+      });
+
+      if (!result.canceled && result.assets[0]) {
+        await handleImageUpload(result.assets[0].uri);
+      }
+    } catch (error) {
+      Alert.alert('Error', 'Failed to select image');
+    }
+  };
+
+  const handleImageUpload = async (uri: string) => {
+    if (!profile?.id) return;
+
+    setIsUploadingImage(true);
+    try {
+      // Upload to Supabase Storage
+      const avatarUrl = await uploadAvatar(profile.id, uri);
+      
+      // Update local state immediately for instant UI feedback
+      setAvatarUri(avatarUrl);
+      
+      // Update profile in database
+      await updateProfile({ avatarUrl });
+      
+      Alert.alert('Success', 'Profile picture updated successfully');
+    } catch (error) {
+      Alert.alert('Error', 'Failed to upload profile picture');
+      console.error('Upload error:', error);
+    } finally {
+      setIsUploadingImage(false);
+    }
+  };
 
   const handleSave = async () => {
     if (!displayName.trim()) {
@@ -73,13 +175,26 @@ export function EditProfileScreen() {
 
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
         <View style={styles.avatarSection}>
-          <AvatarCircle size={100} uri={profile?.avatarUrl} borderColor={colors.crimson} borderWidth={3} />
-          <TouchableOpacity style={[styles.changePhotoButton, { backgroundColor: colors.crimson }]}>
+          <View style={styles.avatarContainer}>
+            <AvatarCircle size={100} uri={avatarUri} borderColor={colors.crimson} borderWidth={3} />
+            {isUploadingImage && (
+              <View style={styles.uploadingOverlay}>
+                <ActivityIndicator size="large" color={colors.white} />
+              </View>
+            )}
+          </View>
+          <TouchableOpacity
+            style={[styles.changePhotoButton, { backgroundColor: colors.crimson }]}
+            onPress={handlePickImage}
+            disabled={isUploadingImage}
+          >
             <Ionicons name="camera" size={20} color={colors.white} />
           </TouchableOpacity>
-          <Text style={[styles.changePhotoText, { color: colors.crimson, fontFamily: TYPOGRAPHY.fonts.sansSemiBold }]}>
-            Change Photo
-          </Text>
+          <TouchableOpacity onPress={handlePickImage} disabled={isUploadingImage}>
+            <Text style={[styles.changePhotoText, { color: colors.crimson, fontFamily: TYPOGRAPHY.fonts.sansSemiBold }]}>
+              {isUploadingImage ? 'Uploading...' : 'Change Photo'}
+            </Text>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.formSection}>
@@ -182,6 +297,21 @@ const styles = StyleSheet.create({
   saveButton: { fontSize: TYPOGRAPHY.sizes.base },
   scrollContent: { padding: SPACING.base, paddingBottom: 40 },
   avatarSection: { alignItems: 'center', paddingVertical: SPACING.xl },
+  avatarContainer: {
+    position: 'relative',
+    marginBottom: SPACING.sm,
+  },
+  uploadingOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   changePhotoButton: {
     position: 'absolute',
     bottom: SPACING.xxxl,

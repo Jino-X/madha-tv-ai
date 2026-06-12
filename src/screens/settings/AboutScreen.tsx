@@ -36,7 +36,7 @@ export function AboutScreen() {
             <Text style={styles.logoText}>🙏</Text>
           </View>
           <Text style={[styles.appName, { color: colors.ink, fontFamily: TYPOGRAPHY.fonts.serifBold }]}>
-            Madha TV AI
+            Ask Madha
           </Text>
           <Text style={[styles.tagline, { color: colors.inkMedium, fontFamily: TYPOGRAPHY.fonts.serifItalic }]}>
             Your Catholic Spiritual Companion
@@ -179,7 +179,7 @@ export function AboutScreen() {
             Made with ❤️ and 🙏 for the Catholic community
           </Text>
           <Text style={[styles.copyright, { color: colors.inkFaint, fontFamily: TYPOGRAPHY.fonts.sansRegular }]}>
-            © {new Date().getFullYear()} Madha TV. All rights reserved.
+            © {new Date().getFullYear()} Ask Madha. All rights reserved.
           </Text>
         </View>
       </ScrollView>

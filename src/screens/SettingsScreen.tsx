@@ -130,7 +130,7 @@ export function SettingsScreen() {
 
         <SectionLabel title="SUPPORT" />
         <View style={[styles.section, { backgroundColor: colors.surface }, SHADOWS.sm]}>
-          <SettingsRow icon="information-circle-outline" label="About Madha TV" onPress={() => navigation.navigate('About')} />
+          <SettingsRow icon="information-circle-outline" label="About Ask Madha" onPress={() => navigation.navigate('About')} />
           <View style={[styles.divider, { backgroundColor: colors.divider }]} />
           <SettingsRow icon="help-circle-outline" label="Help Center" onPress={() => navigation.navigate('HelpCenter')} />
           <View style={[styles.divider, { backgroundColor: colors.divider }]} />
