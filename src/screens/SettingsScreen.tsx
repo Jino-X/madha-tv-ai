@@ -51,7 +51,7 @@ export function SettingsScreen() {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<any>();
-  const { profile, signOut } = useAuthStore();
+  const { profile } = useAuthStore();
   const { currentTheme } = useThemeStore();
 
   const themeNames: Record<string, string> = {
@@ -97,8 +97,6 @@ export function SettingsScreen() {
           <SettingsRow icon="help-circle-outline" label="Help Center" onPress={() => navigation.navigate('HelpCenter')} />
           <View style={[styles.divider, { backgroundColor: colors.divider }]} />
           <SettingsRow icon="star-outline" label="Rate the App" onPress={() => navigation.navigate('RateApp')} />
-          <View style={[styles.divider, { backgroundColor: colors.divider }]} />
-          <SettingsRow icon="log-out-outline" label="Sign Out" isDestructive onPress={signOut} />
         </View>
       </ScrollView>
     </View>
