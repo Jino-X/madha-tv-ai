@@ -1,6 +1,6 @@
-# Madha TV AI - Catholic Spiritual Companion
+# Ask Madha - Catholic Spiritual Companion
 
-A deeply compassionate, theologically grounded Catholic spiritual guide mobile application built with React Native and Expo. Madha TV AI serves as your personal spiritual director, offering guidance rooted in Catholic Catechism, Sacred Scripture, the writings of the Saints, and daily liturgy.
+A deeply compassionate, theologically grounded Catholic spiritual guide mobile application built with React Native and Expo. Ask Madha serves as your personal spiritual director, offering guidance rooted in Catholic Catechism, Sacred Scripture, the writings of the Saints, and daily liturgy.
 
 ## 🙏 Features
 
@@ -151,7 +151,7 @@ eas build --profile production --platform android
 ## 📂 Project Structure
 
 ```
-MadhaTVAI/
+AskMadha/
 ├── src/
 │   ├── api/              # API clients (OpenAI, Bible, Vatican News)
 │   ├── components/       # Reusable UI components

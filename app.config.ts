@@ -1,10 +1,10 @@
 export default {
-  name: 'Madha TV AI',
-  slug: 'madha-tv-ai',
+  name: 'Ask Madha',
+  slug: 'ask-madha',
   version: '1.0.0',
   orientation: 'portrait' as const,
   icon: './assets/icon.png',
-  scheme: 'madhatvai',
+  scheme: 'askmadha',
   userInterfaceStyle: 'automatic' as const,
   newArchEnabled: false,
   ios: {
@@ -40,7 +40,7 @@ export default {
   ],
   extra: {
     eas: {
-      projectId: '65e9c770-122a-4efd-8886-5942cd3f9af3',
+      projectId: '795acfa1-0746-4411-a367-f6964ea05a48',
     },
     SUPABASE_URL: process.env.SUPABASE_URL,
     SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY,

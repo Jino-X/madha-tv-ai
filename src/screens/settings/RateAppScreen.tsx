@@ -83,7 +83,7 @@ export function RateAppScreen() {
         <View style={[styles.heroCard, { backgroundColor: colors.surface }, SHADOWS.md]}>
           <Text style={styles.heroEmoji}>🙏</Text>
           <Text style={[styles.heroTitle, { color: colors.ink, fontFamily: TYPOGRAPHY.fonts.serifBold }]}>
-            Enjoying Madha TV AI?
+            Enjoying Ask Madha?
           </Text>
           <Text style={[styles.heroDesc, { color: colors.inkMedium, fontFamily: TYPOGRAPHY.fonts.serifItalic }]}>
             Your feedback helps us serve the Catholic community better

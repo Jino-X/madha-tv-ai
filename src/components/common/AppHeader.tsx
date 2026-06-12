@@ -16,7 +16,7 @@ interface AppHeaderProps {
 }
 
 export function AppHeader({
-  title = 'Madha TV AI',
+  title = 'Ask Madha',
   showBackButton = false,
   onBack,
   onAvatarPress,

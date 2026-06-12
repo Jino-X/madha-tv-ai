@@ -36,7 +36,7 @@ export function AboutScreen() {
             <Text style={styles.logoText}>🙏</Text>
           </View>
           <Text style={[styles.appName, { color: colors.ink, fontFamily: TYPOGRAPHY.fonts.serifBold }]}>
-            Madha TV AI
+            Ask Madha
           </Text>
           <Text style={[styles.tagline, { color: colors.inkMedium, fontFamily: TYPOGRAPHY.fonts.serifItalic }]}>
             Your Catholic Spiritual Companion
