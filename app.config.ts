@@ -9,7 +9,7 @@ export default {
   newArchEnabled: false,
   ios: {
     supportsTablet: true,
-    bundleIdentifier: 'com.madhatv.ai',
+    bundleIdentifier: 'com.askmadha',
     infoPlist: {
       ITSAppUsesNonExemptEncryption: false,
     },
@@ -21,7 +21,7 @@ export default {
       backgroundImage: './assets/android-icon-background.png',
       backgroundColor: '#2C1810',
     },
-    package: 'com.madhatv.ai',
+    package: 'com.askmadha',
     softwareKeyboardLayoutMode: 'resize',
     permissions: [
       'VIBRATE',
